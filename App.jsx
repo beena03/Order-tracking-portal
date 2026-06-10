@@ -126,5 +126,3 @@ export default function OrderPortal() {
         </div>
     );
 }
-
-export default App
