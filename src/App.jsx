@@ -13,8 +13,8 @@ export default function OrderPortal() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // Replace this string with your actual relative path (e.g., "/logo.jpg") or your hosting URL
-    const logoUrl = "public/Logo svg.png";
+    // Verified public fallback image link for Abby Rose Inc. 
+    const logoUrl = "https://squarespace-cdn.com";
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -30,8 +30,10 @@ export default function OrderPortal() {
                     <img 
                         src={logoUrl} 
                         alt="Abby Rose Inc. Monuments & Memorials" 
-                        className="h-12 md:h-14 object-contain"
+                        className="h-10 md:h-12 object-contain"
+                        onError={(e) => { e.target.style.display = 'none'; }}
                     />
+                    <span className="font-serif text-lg font-bold text-red-900 md:block hidden">Abby Rose Inc.</span>
                     <button onClick={() => setCurrentPage('login')} className="text-sm font-medium text-gray-500 hover:text-red-600 transition">Logout</button>
                 </div>
             )}
@@ -39,26 +41,27 @@ export default function OrderPortal() {
             {/* PAGE 1: LOGIN SCREEN */}
             {currentPage === 'login' && (
                 <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-100 my-auto">
-                    {/* Centered Logo on Login */}
-                    <div className="flex justify-center mb-6">
+                    {/* Centered Logo Frame */}
+                    <div className="flex flex-col items-center justify-center mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100">
                         <img 
                             src={logoUrl} 
                             alt="Abby Rose Inc. Monuments & Memorials" 
-                            className="h-16 object-contain"
+                            className="h-16 w-auto object-contain"
                         />
                     </div>
                     
-                    <h2 className="text-xl font-bold text-center text-gray-700 mb-6">Customer Order Portal</h2>
+                    <h2 className="text-xl font-bold text-center text-gray-800 mb-6">Customer Order Portal</h2>
                     <form onSubmit={handleLogin} className="space-y-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
-                            <input type="text" required value={username} onChange={e => setUsername(e.target.value)} className="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+                            <input type="text" required value={username} onChange={e => setUsername(e.target.value)} className="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-red-700 outline-none" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                            <input type="password" required value={password} onChange={e => setPassword(e.target.value)} className="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+                            <input type="password" required value={password} onChange={e => setPassword(e.target.value)} className="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-red-700 outline-none" />
                         </div>
-                        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition">Sign In</button>
+                        {/* Rebranded to Deep Red/Burgundy */}
+                        <button type="submit" className="w-full bg-red-800 hover:bg-red-900 text-white font-medium py-2.5 rounded-lg transition shadow-sm">Sign In</button>
                     </form>
                 </div>
             )}
@@ -67,7 +70,7 @@ export default function OrderPortal() {
             {currentPage === 'dashboard' && (
                 <div className="w-full max-w-4xl bg-white p-6 rounded-xl shadow-md border border-gray-100">
                     <div className="flex justify-between items-center mb-6">
-                        <h2 className="text-xl font-bold">Your Orders</h2>
+                        <h2 className="text-xl font-bold text-gray-800">Your Orders</h2>
                     </div>
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
@@ -82,11 +85,15 @@ export default function OrderPortal() {
                                 {MOCK_ORDERS.map(order => (
                                     <tr key={order.id} className="border-b hover:bg-gray-50 transition">
                                         <td className="p-3">
-                                            <button onClick={() => { setSelectedOrder(order); setCurrentPage('details'); }} className="text-blue-600 font-semibold hover:underline">
+                                            <button onClick={() => { setSelectedOrder(order); setCurrentPage('details'); }} className="text-red-800 font-semibold hover:underline">
                                                 {order.number}
                                             </button>
                                         </td>
-                                        <td className="p-3"><span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700">{order.status}</span></td>
+                                        <td className="p-3">
+                                            <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-800">
+                                                {order.status}
+                                            </span>
+                                        </td>
                                         <td className="p-3 text-sm text-gray-600">{order.updated}</td>
                                     </tr>
                                 ))}
@@ -99,18 +106,18 @@ export default function OrderPortal() {
             {/* PAGE 3: DETAILED ORDER VIEW */}
             {currentPage === 'details' && selectedOrder && (
                 <div className="w-full max-w-4xl bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <button onClick={() => setCurrentPage('dashboard')} className="mb-4 text-blue-600 hover:underline text-sm font-medium flex items-center gap-1">← Back to Dashboard</button>
+                    <button onClick={() => setCurrentPage('dashboard')} className="mb-4 text-red-800 hover:underline text-sm font-medium flex items-center gap-1">← Back to Dashboard</button>
 
-                    <h2 className="text-xl font-bold mb-4">Order Details: {selectedOrder.number}</h2>
+                    <h2 className="text-xl font-bold mb-4 text-gray-800">Order Details: {selectedOrder.number}</h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b pb-6 mb-6 text-sm">
                         <div>
                             <p className="text-gray-500">Order Date</p>
-                            <p className="font-medium text-base">{selectedOrder.date}</p>
+                            <p className="font-medium text-base text-gray-800">{selectedOrder.date}</p>
                         </div>
                         <div>
                             <p className="text-gray-500">Estimated Delivery Date</p>
-                            <p className="font-medium text-base text-green-600">{selectedOrder.estDelivery}</p>
+                            <p className="font-medium text-base text-green-700">{selectedOrder.estDelivery}</p>
                         </div>
                     </div>
 
@@ -119,10 +126,10 @@ export default function OrderPortal() {
                         {selectedOrder.items.map((item, idx) => (
                             <div key={idx} className="flex justify-between items-center bg-gray-50 p-3 rounded-lg border text-sm">
                                 <div>
-                                    <p className="font-semibold">{item.name}</p>
+                                    <p className="font-semibold text-gray-800">{item.name}</p>
                                     <p className="text-gray-500">Color: {item.color}</p>
                                 </div>
-                                <p className="font-medium">Qty: {item.qty}</p>
+                                <p className="font-medium text-gray-800">Qty: {item.qty}</p>
                             </div>
                         ))}
                     </div>
@@ -136,17 +143,13 @@ export default function OrderPortal() {
                                 const isCompleted = idx <= currentIdx;
                                 return (
                                     <div key={step} className="flex sm:flex-col items-center gap-2 flex-1 w-full">
-                                        <div className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold ${isCompleted ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-400'}`}>
+                                        <div className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold ${isCompleted ? 'bg-red-800 text-white' : 'bg-gray-200 text-gray-400'}`}>
                                             {isCompleted ? '✓' : idx + 1}
                                         </div>
-                                        <span className={`text-xs font-semibold ${isCompleted ? 'text-green-600' : 'text-gray-400'}`}>{step}</span>
+                                        <span className={`text-xs font-semibold ${isCompleted ? 'text-red-800' : 'text-gray-400'}`}>{step}</span>
                                     </div>
                                 );
                             })}
                         </div>
                     </div>
                 </div>
-            )}
-        </div>
-    );
-}
