@@ -13,9 +13,6 @@ export default function OrderPortal() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // Short placeholder link that never cuts off text lines during paste
-    const logoUrl = "https://placehold.co.";
-
     const handleLogin = (e) => {
         e.preventDefault();
         if (username && password) setCurrentPage('dashboard');
@@ -27,13 +24,9 @@ export default function OrderPortal() {
             {/* PERSISTENT HEADER FOR AUTHENTICATED PAGES */}
             {currentPage !== 'login' && (
                 <div className="w-full max-w-4xl bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-4 flex justify-between items-center">
-                    <div className="flex items-center gap-3">
-                        <img 
-                            src={logoUrl} 
-                            alt="Abby Rose Inc." 
-                            className="h-10 md:h-12 object-contain"
-                        />
-                        <span className="font-serif text-lg font-bold text-red-900">Abby Rose Inc.</span>
+                    <div className="flex flex-col text-left">
+                        <span className="font-serif text-lg font-bold tracking-tight text-red-900">Abby Rose Incorporated</span>
+                        <span className="text-[10px] tracking-widest text-emerald-700 uppercase font-bold">Monuments and Memorials</span>
                     </div>
                     <button onClick={() => setCurrentPage('login')} className="text-sm font-medium text-gray-500 hover:text-red-600 transition">Logout</button>
                 </div>
@@ -42,18 +35,18 @@ export default function OrderPortal() {
             {/* PAGE 1: LOGIN SCREEN */}
             {currentPage === 'login' && (
                 <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-100 my-auto">
-                    {/* Centered Logo Frame */}
-                    <div className="flex flex-col items-center justify-center mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100 text-center">
-                        <img 
-                            src={logoUrl} 
-                            alt="Abby Rose Inc." 
-                            className="h-16 w-auto object-contain mb-1 rounded"
-                        />
-                        <span className="font-serif text-xl font-bold text-red-900 block mt-2">Abby Rose Inc.</span>
-                        <span className="text-xs tracking-widest text-gray-500 uppercase font-semibold block mt-0.5">Monuments and Memorials</span>
+                    {/* CUSTOM DESIGNED GRAPHIC BADGE BOX */}
+                    <div className="flex flex-col items-center justify-center mb-8 bg-gray-900 py-6 px-4 rounded-2xl border border-gray-800 text-center shadow-lg relative overflow-hidden">
+                        {/* Styled Emblem Circle */}
+                        <div className="w-16 h-16 rounded-full border-2 border-dashed border-emerald-500 flex items-center justify-center mb-3 bg-red-950 animate-pulse">
+                            <span className="text-xl">🌹</span>
+                        </div>
+                        <span className="font-serif text-xl font-bold tracking-wide text-gray-100">Abby Rose Incorporated</span>
+                        <div className="w-16 h-0.5 bg-emerald-500 my-2 rounded"></div>
+                        <span className="text-[10px] tracking-widest text-emerald-400 uppercase font-bold">Monuments and Memorials</span>
                     </div>
                     
-                    <h2 className="text-xl font-bold text-center text-gray-800 mb-6">Customer Order Portal</h2>
+                    <h2 className="text-lg font-bold text-center text-gray-800 mb-6">Customer Order Portal</h2>
                     <form onSubmit={handleLogin} className="space-y-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
@@ -150,4 +143,3 @@ export default function OrderPortal() {
                                         </div>
                                         <span className={`text-xs font-semibold ${isCompleted ? 'text-red-800' : 'text-gray-400'}`}>{step}</span>
                                     </div>
-                                );
