@@ -14,7 +14,7 @@ export default function OrderPortal() {
     const [password, setPassword] = useState('');
 
     // Replace this string with your actual relative path (e.g., "/logo.jpg") or your hosting URL
-    const logoUrl = "https://squarespace-cdn.com";
+    const logoUrl = "src/Abby logo.jpeg";
 
     const handleLogin = (e) => {
         e.preventDefault();
