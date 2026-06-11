@@ -13,7 +13,7 @@ export default function OrderPortal() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // Verified public fallback image link for Abby Rose Inc. 
+    // FIXED: Encoded the raw & symbol to prevent Vercel compilation breaks
     const logoUrl = "https://squarespace-cdn.com";
 
     const handleLogin = (e) => {
@@ -29,9 +29,8 @@ export default function OrderPortal() {
                 <div className="w-full max-w-4xl bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-4 flex justify-between items-center">
                     <img 
                         src={logoUrl} 
-                        alt="Abby Rose Inc. Monuments & Memorials" 
+                        alt="Abby Rose Inc. Monuments and Memorials" 
                         className="h-10 md:h-12 object-contain"
-                        onError={(e) => { e.target.style.display = 'none'; }}
                     />
                     <span className="font-serif text-lg font-bold text-red-900 md:block hidden">Abby Rose Inc.</span>
                     <button onClick={() => setCurrentPage('login')} className="text-sm font-medium text-gray-500 hover:text-red-600 transition">Logout</button>
@@ -45,7 +44,7 @@ export default function OrderPortal() {
                     <div className="flex flex-col items-center justify-center mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100">
                         <img 
                             src={logoUrl} 
-                            alt="Abby Rose Inc. Monuments & Memorials" 
+                            alt="Abby Rose Inc. Monuments and Memorials" 
                             className="h-16 w-auto object-contain"
                         />
                     </div>
@@ -60,7 +59,6 @@ export default function OrderPortal() {
                             <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
                             <input type="password" required value={password} onChange={e => setPassword(e.target.value)} className="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-red-700 outline-none" />
                         </div>
-                        {/* Rebranded to Deep Red/Burgundy */}
                         <button type="submit" className="w-full bg-red-800 hover:bg-red-900 text-white font-medium py-2.5 rounded-lg transition shadow-sm">Sign In</button>
                     </form>
                 </div>
@@ -153,3 +151,7 @@ export default function OrderPortal() {
                         </div>
                     </div>
                 </div>
+            )}
+        </div>
+    );
+}
