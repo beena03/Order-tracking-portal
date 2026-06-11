@@ -12,28 +12,33 @@ export default function OrderPortal() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const logoUrl = "https://clearbit.com";
+    // LOOKS DIRECTLY AT YOUR PROJECT'S PUBLIC FOLDER
+    const logoUrl = "/logo.png";
     const steps = ['Stock Enroute', 'Stock Arrived', 'Sandblasting', 'Completed', 'Installed'];
 
     return (
         <div className="min-h-screen bg-gray-50 text-gray-900 font-sans flex flex-col items-center p-4">
+            
+            {/* PERSISTENT BAR FOR AUTHENTICATED PAGES */}
             {currentPage !== 'login' && (
                 <div className="w-full max-w-4xl bg-white p-4 rounded-xl shadow-sm border mb-4 flex justify-between items-center">
                     <div className="flex items-center gap-3">
-                        <img src={logoUrl} alt="Logo" className="h-10 w-10 object-contain rounded-full bg-gray-900" />
+                        <img src={logoUrl} alt="Abby Rose Logo" className="h-10 w-10 object-contain" />
                         <div className="flex flex-col text-left">
                             <span className="font-serif text-lg font-bold text-red-900 leading-tight">Abby Rose Inc.</span>
                             <span className="text-[10px] tracking-widest text-emerald-700 font-bold uppercase">Monuments and Memorials</span>
                         </div>
                     </div>
-                    <button onClick={() => setCurrentPage('login')} className="text-sm font-medium text-gray-500 hover:text-red-600">Logout</button>
+                    <button onClick={() => setCurrentPage('login')} className="text-sm font-medium text-gray-500 hover:text-red-600 transition">Logout</button>
                 </div>
             )}
 
+            {/* PAGE 1: LOGIN SCREEN */}
             {currentPage === 'login' && (
                 <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-100 my-auto">
+                    {/* LOGO ON LEFT | HEADERS ON RIGHT */}
                     <div className="flex items-center justify-start gap-4 mb-8 bg-gray-50 p-4 rounded-2xl border border-gray-100 shadow-inner">
-                        <img src={logoUrl} alt="Logo" className="h-14 w-14 object-contain rounded-full bg-gray-900 shrink-0 shadow-md" />
+                        <img src={logoUrl} alt="Abby Rose Inc." className="h-14 w-14 object-contain shrink-0" />
                         <div className="flex flex-col text-left">
                             <span className="font-serif text-xl font-bold tracking-wide text-red-900 leading-tight">Abby Rose Inc.</span>
                             <span className="text-[10px] tracking-wider text-emerald-700 font-bold uppercase mt-1">Monuments and Memorials</span>
@@ -48,6 +53,7 @@ export default function OrderPortal() {
                 </div>
             )}
 
+            {/* PAGE 2: ORDER DASHBOARD */}
             {currentPage === 'dashboard' && (
                 <div className="w-full max-w-4xl bg-white p-6 rounded-xl shadow-md border border-gray-100">
                     <h2 className="text-xl font-bold mb-4">Your Orders</h2>
@@ -70,6 +76,7 @@ export default function OrderPortal() {
                 </div>
             )}
 
+            {/* PAGE 3: DETAILED ORDER VIEW */}
             {currentPage === 'details' && selectedOrder && (
                 <div className="w-full max-w-4xl bg-white p-6 rounded-xl shadow-md border border-gray-100">
                     <button onClick={() => setCurrentPage('dashboard')} className="mb-4 text-red-800 hover:underline text-sm font-medium flex items-center gap-1">← Back to Dashboard</button>
@@ -82,13 +89,13 @@ export default function OrderPortal() {
                         <h3 className="font-bold text-gray-700 mb-2">Items Ordered</h3>
                         {selectedOrder.items.map((item, idx) => (
                             <div key={idx} className="flex justify-between items-center bg-gray-50 p-3 rounded-lg border text-sm">
-                                string<div><p className="font-semibold">{item.name}</p><p className="text-gray-500">Color: {item.color}</p></div>
+                                <div><p className="font-semibold">{item.name}</p><p className="text-gray-500">Color: {item.color}</p></div>
                                 <p className="font-medium">Qty: {item.qty}</p>
                             </div>
                         ))}
                     </div>
                     <div className="border-t pt-4">
-                        <h3 className="font-bold text-gray-700 mb-3">Status Progress</h3>
+                        <h3 className="font-bold text-gray-700 mb-3">Status Progress Flow</h3>
                         <div className="grid grid-cols-5 gap-2 text-center text-[10px] font-bold">
                             {steps.map((step, idx) => (
                                 <div key={step} className={`p-2 rounded border ${idx <= steps.indexOf(selectedOrder.status) ? 'bg-red-800 text-white border-red-900' : 'bg-gray-100 text-gray-400 border-gray-200'}`}>{step}</div>
