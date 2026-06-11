@@ -7,26 +7,15 @@ const MOCK_ORDERS = [
     { id: '3', number: '26-02-16-003-DEF', status: 'Stock Enroute', updated: '2026-06-10 10:45', date: '2026-06-09', estDelivery: '2026-06-05', items: [{ name: 'Flush Marker', color: 'GA Gray', qty: 1 }] }
 ];
 
-// INLINE COMPONENT: This generates the logo locally out of pure code so it can never break
-function AbbyRoseLogo({ heightClass = "h-12" }) {
-    return (
-        <svg className={`${heightClass} w-auto`} viewBox="0 0 500 80" xmlns="http://w3.org">
-            {/* Elegant Vector Text Elements */}
-            <text x="50%" y="38" textAnchor="middle" fontFamily="Georgia, serif" fontSize="28" fontWeight="bold" fill="#7f1d1d">
-                Abby Rose Inc.
-            </text>
-            <text x="50%" y="65" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="13" fontWeight="600" letterSpacing="3" fill="#4b5563">
-                MONUMENTS &amp; MEMORIALS
-            </text>
-        </svg>
-    );
-}
-
 export default function OrderPortal() {
     const [currentPage, setCurrentPage] = useState('login'); // 'login', 'dashboard', 'details'
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    // DYNAMIC DOMAIN LOOKUP: Fetches the logo automatically using your live domain name
+    const websiteDomain = "abbyroseinc.com";
+    const logoUrl = `https://clearbit.com{websiteDomain}`;
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -39,8 +28,16 @@ export default function OrderPortal() {
             {/* PERSISTENT HEADER FOR AUTHENTICATED PAGES */}
             {currentPage !== 'login' && (
                 <div className="w-full max-w-4xl bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-4 flex justify-between items-center">
-                    {/* Rendered directly via internal code */}
-                    <AbbyRoseLogo heightClass="h-10 md:h-12" />
+                    <img 
+                        src={logoUrl} 
+                        alt="Abby Rose Inc. Monuments and Memorials" 
+                        className="h-10 md:h-12 object-contain"
+                        onError={(e) => {
+                            // Fallback if the logo API takes a moment to index
+                            e.target.src = "https://squarespace-cdn.com";
+                        }}
+                    />
+                    <span className="font-serif text-lg font-bold text-red-900 md:block hidden">Abby Rose Inc.</span>
                     <button onClick={() => setCurrentPage('login')} className="text-sm font-medium text-gray-500 hover:text-red-600 transition">Logout</button>
                 </div>
             )}
@@ -48,9 +45,16 @@ export default function OrderPortal() {
             {/* PAGE 1: LOGIN SCREEN */}
             {currentPage === 'login' && (
                 <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-100 my-auto">
-                    {/* Rendered directly via internal code */}
+                    {/* Centered Logo Frame */}
                     <div className="flex flex-col items-center justify-center mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100">
-                        <AbbyRoseLogo heightClass="h-16" />
+                        <img 
+                            src={logoUrl} 
+                            alt="Abby Rose Inc. Monuments and Memorials" 
+                            className="h-16 w-auto object-contain"
+                            onError={(e) => {
+                                e.target.src = "https://squarespace-cdn.com";
+                            }}
+                        />
                     </div>
                     
                     <h2 className="text-xl font-bold text-center text-gray-800 mb-6">Customer Order Portal</h2>
@@ -146,16 +150,3 @@ export default function OrderPortal() {
                                 return (
                                     <div key={step} className="flex sm:flex-col items-center gap-2 flex-1 w-full">
                                         <div className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold ${isCompleted ? 'bg-red-800 text-white' : 'bg-gray-200 text-gray-400'}`}>
-                                            {isCompleted ? '✓' : idx + 1}
-                                        </div>
-                                        <span className={`text-xs font-semibold ${isCompleted ? 'text-red-800' : 'text-gray-400'}`}>{step}</span>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                </div>
-            )}
-        </div>
-    );
-}
