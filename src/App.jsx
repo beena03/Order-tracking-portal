@@ -37,7 +37,6 @@ export default function OrderPortal() {
                 <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-100 my-auto">
                     {/* CUSTOM DESIGNED GRAPHIC BADGE BOX */}
                     <div className="flex flex-col items-center justify-center mb-8 bg-gray-900 py-6 px-4 rounded-2xl border border-gray-800 text-center shadow-lg relative overflow-hidden">
-                        {/* Styled Emblem Circle */}
                         <div className="w-16 h-16 rounded-full border-2 border-dashed border-emerald-500 flex items-center justify-center mb-3 bg-red-950 animate-pulse">
                             <span className="text-xl">🌹</span>
                         </div>
@@ -143,3 +142,5 @@ export default function OrderPortal() {
                                         </div>
                                         <span className={`text-xs font-semibold ${isCompleted ? 'text-red-800' : 'text-gray-400'}`}>{step}</span>
                                     </div>
+                                );
+                            })}
