@@ -14,7 +14,7 @@ export default function OrderPortal() {
     const [password, setPassword] = useState('');
 
     // Replace this string with your actual relative path (e.g., "/logo.jpg") or your hosting URL
-    const logoUrl = "public/Logo.png";
+    const logoUrl = "public/Logo svg.png";
 
     const handleLogin = (e) => {
         e.preventDefault();
