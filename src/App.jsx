@@ -13,8 +13,8 @@ export default function OrderPortal() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // FIXED: Broken into string fragments to prevent the compiler from reading the %26 as a syntax layout operator
-    const logoUrl = "https://squarespace-cdn.com+" + "%26" + "+Memorials";
+    // Short placeholder link that never cuts off text lines during paste
+    const logoUrl = "https://placehold.co.";
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -30,7 +30,7 @@ export default function OrderPortal() {
                     <div className="flex items-center gap-3">
                         <img 
                             src={logoUrl} 
-                            alt="Abby Rose Inc. Monuments and Memorials" 
+                            alt="Abby Rose Inc." 
                             className="h-10 md:h-12 object-contain"
                         />
                         <span className="font-serif text-lg font-bold text-red-900">Abby Rose Inc.</span>
@@ -46,10 +46,10 @@ export default function OrderPortal() {
                     <div className="flex flex-col items-center justify-center mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100 text-center">
                         <img 
                             src={logoUrl} 
-                            alt="Abby Rose Inc. Monuments and Memorials" 
-                            className="h-16 w-auto object-contain mb-1"
+                            alt="Abby Rose Inc." 
+                            className="h-16 w-auto object-contain mb-1 rounded"
                         />
-                        <span className="font-serif text-xl font-bold text-red-900 block">Abby Rose Inc.</span>
+                        <span className="font-serif text-xl font-bold text-red-900 block mt-2">Abby Rose Inc.</span>
                         <span className="text-xs tracking-widest text-gray-500 uppercase font-semibold block mt-0.5">Monuments and Memorials</span>
                     </div>
                     
@@ -148,3 +148,6 @@ export default function OrderPortal() {
                                         <div className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold ${isCompleted ? 'bg-red-800 text-white' : 'bg-gray-200 text-gray-400'}`}>
                                             {isCompleted ? '✓' : idx + 1}
                                         </div>
+                                        <span className={`text-xs font-semibold ${isCompleted ? 'text-red-800' : 'text-gray-400'}`}>{step}</span>
+                                    </div>
+                                );
