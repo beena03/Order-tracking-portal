@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 
 // Mock Database for Local Demo
 const MOCK_ORDERS = [
-    { id: '1', number: 'ORD-2026-001', status: 'Installed', updated: '2026-06-09 14:30', date: '2026-06-07', estDelivery: '2026-06-12', items: [{ name: 'Die & Base', color: 'Jet Black', qty: 1 }] },
-    { id: '2', number: 'ORD-2026-002', status: 'Completed', updated: '2026-06-05 11:15', date: '2026-06-01', estDelivery: '2026-06-05', items: [{ name: 'Slant', color: 'Barre Gray', qty: 2 }] }
+    { id: '1', number: '25-05-13-021-ABC', status: 'Installed', updated: '2026-06-09 14:30', date: '2026-06-07', estDelivery: '2026-06-12', items: [{ name: 'Die & Base', color: 'Jet Black', qty: 1 }] },
+    { id: '2', number: '26-02-16-001-XYZ', status: 'Completed', updated: '2026-06-05 11:15', date: '2026-06-01', estDelivery: '2026-06-05', items: [{ name: 'Slant', color: 'Barre Gray', qty: 2 }] },
+    { id: '3', number: '26-02-16-003-DEF', status: 'Stock Enroute', updated: '2026-06-10 10:45', date: '2026-06-09', estDelivery: '2026-06-05', items: [{ name: 'Flush Marker', color: 'GA Gray', qty: 1 }] }
 ];
 
 export default function OrderPortal() {
