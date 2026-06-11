@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 // Mock Database for Local Demo
 const MOCK_ORDERS = [
-    { id: '1', number: 'ORD-2026-001', status: 'Shipped', updated: '2026-06-09 14:30', date: '2026-06-07', estDelivery: '2026-06-12', items: [{ name: 'Wireless Headphones', color: 'Matte Black', qty: 1 }] },
-    { id: '2', number: 'ORD-2026-002', status: 'Delivered', updated: '2026-06-05 11:15', date: '2026-06-01', estDelivery: '2026-06-05', items: [{ name: 'USB-C Cable', color: 'Space Gray', qty: 2 }] }
+    { id: '1', number: 'ORD-2026-001', status: 'Installed', updated: '2026-06-09 14:30', date: '2026-06-07', estDelivery: '2026-06-12', items: [{ name: 'Die & Base', color: 'Jet Black', qty: 1 }] },
+    { id: '2', number: 'ORD-2026-002', status: 'Completed', updated: '2026-06-05 11:15', date: '2026-06-01', estDelivery: '2026-06-05', items: [{ name: 'Slant', color: 'Barre Gray', qty: 2 }] }
 ];
 
 export default function OrderPortal() {
@@ -106,8 +106,8 @@ export default function OrderPortal() {
                     <div>
                         <h3 className="font-bold text-gray-700 mb-4">Status Tracking Flow</h3>
                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 relative">
-                            {['Placed', 'Processed', 'Shipped', 'Delivered'].map((step, idx) => {
-                                const steps = ['Placed', 'Processed', 'Shipped', 'Delivered'];
+                            {['Stock Enroute', 'Stock Arrived', 'Sandblasting', 'Completed', 'Installed'].map((step, idx) => {
+                                const steps = ['Stock Enroute', 'Stock Arrived', 'Sandblasting', 'Completed', 'Installed'];
                                 const currentIdx = steps.indexOf(selectedOrder.status);
                                 const isCompleted = idx <= currentIdx;
                                 return (
