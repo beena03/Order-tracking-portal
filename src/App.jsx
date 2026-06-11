@@ -7,14 +7,26 @@ const MOCK_ORDERS = [
     { id: '3', number: '26-02-16-003-DEF', status: 'Stock Enroute', updated: '2026-06-10 10:45', date: '2026-06-09', estDelivery: '2026-06-05', items: [{ name: 'Flush Marker', color: 'GA Gray', qty: 1 }] }
 ];
 
+// INLINE COMPONENT: This generates the logo locally out of pure code so it can never break
+function AbbyRoseLogo({ heightClass = "h-12" }) {
+    return (
+        <svg className={`${heightClass} w-auto`} viewBox="0 0 500 80" xmlns="http://w3.org">
+            {/* Elegant Vector Text Elements */}
+            <text x="50%" y="38" textAnchor="middle" fontFamily="Georgia, serif" fontSize="28" fontWeight="bold" fill="#7f1d1d">
+                Abby Rose Inc.
+            </text>
+            <text x="50%" y="65" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="13" fontWeight="600" letterSpacing="3" fill="#4b5563">
+                MONUMENTS &amp; MEMORIALS
+            </text>
+        </svg>
+    );
+}
+
 export default function OrderPortal() {
     const [currentPage, setCurrentPage] = useState('login'); // 'login', 'dashboard', 'details'
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
-    // FIXED: Encoded the raw & symbol to prevent Vercel compilation breaks
-    const logoUrl = "https://imgur.com";
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -27,12 +39,8 @@ export default function OrderPortal() {
             {/* PERSISTENT HEADER FOR AUTHENTICATED PAGES */}
             {currentPage !== 'login' && (
                 <div className="w-full max-w-4xl bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-4 flex justify-between items-center">
-                    <img 
-                        src={logoUrl} 
-                        alt="Abby Rose Inc. Monuments and Memorials" 
-                        className="h-10 md:h-12 object-contain"
-                    />
-                    <span className="font-serif text-lg font-bold text-red-900 md:block hidden">Abby Rose Inc.</span>
+                    {/* Rendered directly via internal code */}
+                    <AbbyRoseLogo heightClass="h-10 md:h-12" />
                     <button onClick={() => setCurrentPage('login')} className="text-sm font-medium text-gray-500 hover:text-red-600 transition">Logout</button>
                 </div>
             )}
@@ -40,13 +48,9 @@ export default function OrderPortal() {
             {/* PAGE 1: LOGIN SCREEN */}
             {currentPage === 'login' && (
                 <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-100 my-auto">
-                    {/* Centered Logo Frame */}
+                    {/* Rendered directly via internal code */}
                     <div className="flex flex-col items-center justify-center mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100">
-                        <img 
-                            src={logoUrl} 
-                            alt="Abby Rose Inc. Monuments and Memorials" 
-                            className="h-16 w-auto object-contain"
-                        />
+                        <AbbyRoseLogo heightClass="h-16" />
                     </div>
                     
                     <h2 className="text-xl font-bold text-center text-gray-800 mb-6">Customer Order Portal</h2>
