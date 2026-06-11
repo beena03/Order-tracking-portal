@@ -13,18 +13,42 @@ export default function OrderPortal() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    // Replace this string with your actual relative path (e.g., "/logo.jpg") or your hosting URL
+    const logoUrl = "https://squarespace-cdn.com";
+
     const handleLogin = (e) => {
         e.preventDefault();
         if (username && password) setCurrentPage('dashboard');
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 text-gray-900 font-sans flex flex-col justify-center items-center p-4">
+        <div className="min-h-screen bg-gray-50 text-gray-900 font-sans flex flex-col justify-start items-center p-4">
+            
+            {/* PERSISTENT HEADER FOR AUTHENTICATED PAGES */}
+            {currentPage !== 'login' && (
+                <div className="w-full max-w-4xl bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-4 flex justify-between items-center">
+                    <img 
+                        src={logoUrl} 
+                        alt="Abby Rose Inc. Monuments & Memorials" 
+                        className="h-12 md:h-14 object-contain"
+                    />
+                    <button onClick={() => setCurrentPage('login')} className="text-sm font-medium text-gray-500 hover:text-red-600 transition">Logout</button>
+                </div>
+            )}
 
             {/* PAGE 1: LOGIN SCREEN */}
             {currentPage === 'login' && (
-                <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-100">
-                    <h2 className="text-2xl font-bold text-center mb-6">Customer Order Portal</h2>
+                <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-100 my-auto">
+                    {/* Centered Logo on Login */}
+                    <div className="flex justify-center mb-6">
+                        <img 
+                            src={logoUrl} 
+                            alt="Abby Rose Inc. Monuments & Memorials" 
+                            className="h-16 object-contain"
+                        />
+                    </div>
+                    
+                    <h2 className="text-xl font-bold text-center text-gray-700 mb-6">Customer Order Portal</h2>
                     <form onSubmit={handleLogin} className="space-y-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
@@ -44,7 +68,6 @@ export default function OrderPortal() {
                 <div className="w-full max-w-4xl bg-white p-6 rounded-xl shadow-md border border-gray-100">
                     <div className="flex justify-between items-center mb-6">
                         <h2 className="text-xl font-bold">Your Orders</h2>
-                        <button onClick={() => setCurrentPage('login')} className="text-sm text-gray-500 hover:text-red-600">Logout</button>
                     </div>
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
@@ -75,7 +98,7 @@ export default function OrderPortal() {
 
             {/* PAGE 3: DETAILED ORDER VIEW */}
             {currentPage === 'details' && selectedOrder && (
-                <div className="w-full max-w-3xl bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                <div className="w-full max-w-4xl bg-white p-6 rounded-xl shadow-md border border-gray-100">
                     <button onClick={() => setCurrentPage('dashboard')} className="mb-4 text-blue-600 hover:underline text-sm font-medium flex items-center gap-1">← Back to Dashboard</button>
 
                     <h2 className="text-xl font-bold mb-4">Order Details: {selectedOrder.number}</h2>
@@ -113,10 +136,10 @@ export default function OrderPortal() {
                                 const isCompleted = idx <= currentIdx;
                                 return (
                                     <div key={step} className="flex sm:flex-col items-center gap-2 flex-1 w-full">
-                                        <div className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold ${isCompleted ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-400'}`}>
+                                        <div className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold ${isCompleted ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-400'}`}>
                                             {isCompleted ? '✓' : idx + 1}
                                         </div>
-                                        <span className={`text-xs font-semibold ${isCompleted ? 'text-blue-600' : 'text-gray-400'}`}>{step}</span>
+                                        <span className={`text-xs font-semibold ${isCompleted ? 'text-green-600' : 'text-gray-400'}`}>{step}</span>
                                     </div>
                                 );
                             })}
