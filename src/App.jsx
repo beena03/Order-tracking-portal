@@ -13,8 +13,8 @@ export default function OrderPortal() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // EMBEDDED LOGO: Hardcoded text representation of your transparent graphic
-    const logoUrl = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAwCAYAAACGv6XNAAAACXBIWXMAAAsTAAALEwEAmpwYAAADwElEQVR4nO2az2sTQRDFX0VFEfSgVvEgIiKCeCh48FSqooKiVvEg/gEePHgQDx7EqlZRLIqieBAVvYgHwYMH8SDoQfEg/gEeBAsVb89Mskm3m2yS3SST7isMhGZmd77z9mXm7WwGg8FgMBgMBoNBiwGwC+A9gG9N9v0VwGfW9006GgA7bNAnv986gAcA6v7t7wE89Yv9Zg3MvYI/v89Z7DOnVb37AL75df8A4KTf1zMAdwF89gW9BfC16b0D0GHjPtt0L7+feYAnAJ77v98D2OPXexvAW9/W5wDeNbGHAHbZsM9p8T39N6gN90DqWbyX30OtcVvU4gA7bNjntPiaXnNfW3vTADwAsMsGffL7reunbYsD7LBhn9Pia3rNoM7WfG8AHLZBn/x+6wCeO6gN99w9VwNoZ4M++X3XzYx69wB8svasBfDI2vO6Z60eADts0Ce/3zqAFwG9DwAetfC9v6w9DwE8b+F7f6w9p8X33L1XA+Bpa89vWftI+6w9p7XPr9byR3u3Wv6ofZ5ay68D2NfC95Za/qh9Xlr+qH2eWv6ofT9p+UvWf8g2Dq33vG2Z/wXfOLLenG0cWv/S2vML9R8H2GHD/tS2DkXN6rGNDRsbNjZsbNjYsLFhY8PGho0NGxs2Nmxs2NiwHULvAdR8X4v/BvWhfCzfHMDfPvfFmO9h8Yshnzf897Xf41w+L878D32f05Xf5yN+nw3/+3zl3//U55r+bH7qM6XfN9XnWv7fPtd0V6rPNf2Fv8/U13T3+m7/fU13v3+eXp/TPUf9e6gN97x7rgZwn+7/uG9Xg+D5V/OPhu7/uN9u0PyreS3d/3GfrrscwH3A9wXv7W7Q/Bf67R5w90F3Z3g36D7gX/XbUf9Oen9QG+4t3L2mNnSvaY8G0ZvvbeHeG3p/UBvupXuvN3Cvae4Dvc6rXpX96v90O/WbBf+VfvsF99g99n79/lK3ZepYmZepYwV9F9x99D+6Hw3feWrvA73Oidof6PVf9YvA8w/56vT+7wN7TdfbH9Tf6X667gO9v9N16lqZl6lrBV7vU/XN0Meeep/T+556f8g2zPscWn7K+j/5xvEw9GfWNxzC0PInbOPhEPon2zjEDgbyM89gMBgMBoPBoEX8BRF7VvOnA9XIAAAAAElFTkSuQmCC";
+    // Cleaned hotlink URL pointing directly to the web logo asset
+    const logoUrl = "https://squarespace-cdn.com";
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -27,12 +27,14 @@ export default function OrderPortal() {
             {/* PERSISTENT HEADER FOR AUTHENTICATED PAGES */}
             {currentPage !== 'login' && (
                 <div className="w-full max-w-4xl bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-4 flex justify-between items-center">
-                    <img 
-                        src={logoUrl} 
-                        alt="Abby Rose Inc." 
-                        className="h-10 md:h-12 object-contain"
-                    />
-                    <span className="font-serif text-lg font-bold text-red-900 md:block hidden">Abby Rose Inc.</span>
+                    <div className="flex items-center gap-3">
+                        <img 
+                            src={logoUrl} 
+                            alt="Abby Rose Inc." 
+                            className="h-10 md:h-12 object-contain"
+                        />
+                        <span className="font-serif text-lg font-bold text-red-900">Abby Rose Inc.</span>
+                    </div>
                     <button onClick={() => setCurrentPage('login')} className="text-sm font-medium text-gray-500 hover:text-red-600 transition">Logout</button>
                 </div>
             )}
@@ -41,12 +43,14 @@ export default function OrderPortal() {
             {currentPage === 'login' && (
                 <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-100 my-auto">
                     {/* Centered Logo Frame */}
-                    <div className="flex flex-col items-center justify-center mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100">
+                    <div className="flex flex-col items-center justify-center mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100 text-center">
                         <img 
                             src={logoUrl} 
                             alt="Abby Rose Inc." 
-                            className="h-14 w-auto object-contain"
+                            className="h-16 w-auto object-contain mb-1"
                         />
+                        <span className="font-serif text-xl font-bold text-red-900 block">Abby Rose Inc.</span>
+                        <span className="text-xs tracking-widest text-gray-500 uppercase font-semibold block mt-0.5">Monuments &amp; Memorials</span>
                     </div>
                     
                     <h2 className="text-xl font-bold text-center text-gray-800 mb-6">Customer Order Portal</h2>
@@ -138,4 +142,10 @@ export default function OrderPortal() {
                             {['Stock Enroute', 'Stock Arrived', 'Sandblasting', 'Completed', 'Installed'].map((step, idx) => {
                                 const steps = ['Stock Enroute', 'Stock Arrived', 'Sandblasting', 'Completed', 'Installed'];
                                 const currentIdx = steps.indexOf(selectedOrder.status);
-                    
+                                const isCompleted = idx <= currentIdx;
+                                return (
+                                    <div key={step} className="flex sm:flex-col items-center gap-2 flex-1 w-full">
+                                        <div className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold ${isCompleted ? 'bg-red-800 text-white' : 'bg-gray-200 text-gray-400'}`}>
+                                            {isCompleted ? '✓' : idx + 1}
+                                        </div>
+                                        <span className={`text-xs font-semibold ${isCompleted ? 'text-red-800' : 'text-gray-400'}`}>{step}</span>
