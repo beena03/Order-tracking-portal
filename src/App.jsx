@@ -14,7 +14,7 @@ export default function OrderPortal() {
     const [password, setPassword] = useState('');
 
     // FIXED: Encoded the raw & symbol to prevent Vercel compilation breaks
-    const logoUrl = "https://weserv.nl";
+    const logoUrl = "https://imgur.com";
 
     const handleLogin = (e) => {
         e.preventDefault();
