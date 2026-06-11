@@ -12,16 +12,16 @@ export default function OrderPortal() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // Lightweight inline SVG badge logo to completely prevent long URL text cuts
-    const logoBadge = "data:image/svg+xml;utf8,<svg viewBox='0 0 100 100' xmlns='http://w3.org'><circle cx='50' cy='50' r='46' fill='%23111827' stroke='%2334d399' stroke-width='3'/><circle cx='50' cy='50' r='36' fill='%23991b1b'/><text x='50' y='58' font-size='26' text-anchor='middle'>🌹</text></svg>";
-
     return (
         <div className="min-h-screen bg-gray-50 text-gray-900 font-sans flex flex-col items-center p-4">
-            {/* AUTHENTICATED PAGES NAVBAR */}
+            {/* NAVIGATION BAR */}
             {currentPage !== 'login' && (
                 <div className="w-full max-w-4xl bg-white p-4 rounded-xl shadow-sm border mb-4 flex justify-between items-center">
                     <div className="flex items-center gap-3">
-                        <img src={logoBadge} alt="Logo" className="h-10 w-10 object-contain" />
+                        {/* CSS Circle Badge Instead of Image Link */}
+                        <div className="w-10 h-10 rounded-full bg-gray-900 border-2 border-emerald-400 flex items-center justify-center text-lg shrink-0">
+                            🌹
+                        </div>
                         <div className="flex flex-col text-left">
                             <span className="font-serif text-lg font-bold text-red-900 leading-tight">Abby Rose Inc.</span>
                             <span className="text-[10px] tracking-widest text-emerald-700 font-bold uppercase">Monuments and Memorials</span>
@@ -34,9 +34,12 @@ export default function OrderPortal() {
             {/* PAGE 1: LOGIN BOX */}
             {currentPage === 'login' && (
                 <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-100 my-auto">
-                    {/* ASSET ON LEFT | HEADERS ON RIGHT */}
+                    {/* LOGO ON LEFT | TYPOGRAPHY ON RIGHT */}
                     <div className="flex items-center justify-start gap-4 mb-8 bg-gray-50 p-4 rounded-2xl border border-gray-100 shadow-inner">
-                        <img src={logoBadge} alt="Abby Rose Badge" className="h-14 w-14 object-contain shrink-0" />
+                        {/* CSS Circle Badge Instead of Image Link */}
+                        <div className="w-14 h-14 rounded-full bg-gray-900 border-2 border-emerald-400 flex items-center justify-center text-2xl shrink-0 shadow">
+                            🌹
+                        </div>
                         <div className="flex flex-col text-left">
                             <span className="font-serif text-xl font-bold tracking-wide text-red-900 leading-tight">Abby Rose Inc.</span>
                             <span className="text-[10px] tracking-wider text-emerald-700 font-bold uppercase mt-1">Monuments and Memorials</span>
@@ -87,7 +90,7 @@ export default function OrderPortal() {
                         <h3 className="font-bold text-gray-700 mb-2">Items Ordered</h3>
                         {selectedOrder.items.map((item, idx) => (
                             <div key={idx} className="flex justify-between items-center bg-gray-50 p-3 rounded-lg border text-sm">
-                                id<div><p className="font-semibold">{item.name}</p><p className="text-gray-500">Color: {item.color}</p></div>
+                                <div><p className="font-semibold">{item.name}</p><p className="text-gray-500">Color: {item.color}</p></div>
                                 <p className="font-medium">Qty: {item.qty}</p>
                             </div>
                         ))}
