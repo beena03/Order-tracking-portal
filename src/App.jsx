@@ -12,43 +12,41 @@ export default function OrderPortal() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // LOOKS DIRECTLY AT YOUR PROJECT'S PUBLIC FOLDER
     const logoUrl = "/logo.png";
     const steps = ['Stock Enroute', 'Stock Arrived', 'Sandblasting', 'Completed', 'Installed'];
 
     return (
         <div className="min-h-screen bg-gray-50 text-gray-900 font-sans flex flex-col items-center p-4">
-            
-            {/* PERSISTENT BAR FOR AUTHENTICATED PAGES */}
+            {/* PORTAL NAVIGATION HEADER */}
             {currentPage !== 'login' && (
                 <div className="w-full max-w-4xl bg-white p-4 rounded-xl shadow-sm border mb-4 flex justify-between items-center">
                     <div className="flex items-center gap-3">
-                        <img src={logoUrl} alt="Abby Rose Logo" className="h-10 w-10 object-contain" />
+                        <img src={logoUrl} alt="Logo" className="h-10 w-10 object-contain" />
                         <div className="flex flex-col text-left">
-                            <span className="font-serif text-lg font-bold text-red-900 leading-tight">Abby Rose Inc.</span>
-                            <span className="text-[10px] tracking-widest text-emerald-700 font-bold uppercase">Monuments and Memorials</span>
+                            <span className="font-serif text-lg font-bold text-gray-900 leading-tight">Abby Rose Inc.</span>
+                            <span className="text-[10px] tracking-widest text-gray-900 font-bold uppercase">Monuments and Memorials</span>
                         </div>
                     </div>
                     <button onClick={() => setCurrentPage('login')} className="text-sm font-medium text-gray-500 hover:text-red-600 transition">Logout</button>
                 </div>
             )}
 
-            {/* PAGE 1: LOGIN SCREEN */}
+            {/* PAGE 1: LOGIN BOX */}
             {currentPage === 'login' && (
                 <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md border border-gray-100 my-auto">
-                    {/* LOGO ON LEFT | HEADERS ON RIGHT */}
                     <div className="flex items-center justify-start gap-4 mb-8 bg-gray-50 p-4 rounded-2xl border border-gray-100 shadow-inner">
-                        <img src={logoUrl} alt="Abby Rose Inc." className="h-14 w-14 object-contain shrink-0" />
+                        <img src={logoUrl} alt="Logo" className="h-14 w-14 object-contain shrink-0" />
                         <div className="flex flex-col text-left">
-                            <span className="font-serif text-xl font-bold tracking-wide text-red-900 leading-tight">Abby Rose Inc.</span>
-                            <span className="text-[10px] tracking-wider text-emerald-700 font-bold uppercase mt-1">Monuments and Memorials</span>
+                            <span className="font-serif text-xl font-bold tracking-wide text-gray-900 leading-tight">Abby Rose Inc.</span>
+                            <span className="text-[10px] tracking-wider text-gray-900 font-bold uppercase mt-1">Monuments and Memorials</span>
                         </div>
                     </div>
                     <h2 className="text-xl font-bold text-center text-gray-800 mb-6">Customer Order Portal</h2>
                     <form onSubmit={(e) => { e.preventDefault(); if (username && password) setCurrentPage('dashboard'); }} className="space-y-4">
-                        <input type="text" placeholder="Username" required value={username} onChange={e => setUsername(e.target.value)} className="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-red-700 outline-none" />
-                        <input type="password" placeholder="Password" required value={password} onChange={e => setPassword(e.target.value)} className="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-red-700 outline-none" />
-                        <button type="submit" className="w-full bg-red-800 hover:bg-red-900 text-white font-medium py-2.5 rounded-lg transition shadow-sm">Sign In</button>
+                        <input type="text" placeholder="Username" required value={username} onChange={e => setUsername(e.target.value)} className="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-600 outline-none" />
+                        <input type="password" placeholder="Password" required value={password} onChange={e => setPassword(e.target.value)} className="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-600 outline-none" />
+                        {/* SIGN IN BUTTON MODIFIED TO EMERALD GREEN */}
+                        <button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 rounded-lg transition shadow-sm">Sign In</button>
                     </form>
                 </div>
             )}
@@ -56,7 +54,7 @@ export default function OrderPortal() {
             {/* PAGE 2: ORDER DASHBOARD */}
             {currentPage === 'dashboard' && (
                 <div className="w-full max-w-4xl bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h2 className="text-xl font-bold mb-4">Your Orders</h2>
+                    <h2 className="text-xl font-bold mb-4 text-gray-900">Your Orders</h2>
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
                             <thead>
@@ -65,8 +63,9 @@ export default function OrderPortal() {
                             <tbody>
                                 {MOCK_ORDERS.map(order => (
                                     <tr key={order.id} className="border-b hover:bg-gray-50 transition">
-                                        <td className="p-3"><button onClick={() => { setSelectedOrder(order); setCurrentPage('details'); }} className="text-red-800 font-semibold hover:underline">{order.number}</button></td>
-                                        <td className="p-3"><span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-800">{order.status}</span></td>
+                                        {/* TABLE DETAILS CONFIGURED TO EMERALD GREEN ACTION BUTTONS */}
+                                        <td className="p-3"><button onClick={() => { setSelectedOrder(order); setCurrentPage('details'); }} className="text-emerald-600 font-semibold hover:underline">{order.number}</button></td>
+                                        <td className="p-3"><span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700">{order.status}</span></td>
                                         <td className="p-3 text-sm text-gray-600">{order.updated}</td>
                                     </tr>
                                 ))}
@@ -79,27 +78,37 @@ export default function OrderPortal() {
             {/* PAGE 3: DETAILED ORDER VIEW */}
             {currentPage === 'details' && selectedOrder && (
                 <div className="w-full max-w-4xl bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <button onClick={() => setCurrentPage('dashboard')} className="mb-4 text-red-800 hover:underline text-sm font-medium flex items-center gap-1">← Back to Dashboard</button>
-                    <h2 className="text-xl font-bold mb-4">Order Details: {selectedOrder.number}</h2>
+                    <button onClick={() => setCurrentPage('dashboard')} className="mb-4 text-emerald-600 hover:underline text-sm font-medium flex items-center gap-1">← Back to Dashboard</button>
+                    <h2 className="text-xl font-bold mb-4 text-gray-900">Order Details: {selectedOrder.number}</h2>
                     <div className="grid grid-cols-2 gap-4 border-b pb-6 mb-6 text-sm">
-                        <div><p className="text-gray-500">Order Date</p><p className="font-medium text-base">{selectedOrder.date}</p></div>
+                        <div><p className="text-gray-500">Order Date</p><p className="font-medium text-base text-gray-900">{selectedOrder.date}</p></div>
                         <div><p className="text-gray-500">Estimated Delivery Date</p><p className="font-medium text-base text-green-700">{selectedOrder.estDelivery}</p></div>
                     </div>
                     <div className="mb-6">
                         <h3 className="font-bold text-gray-700 mb-2">Items Ordered</h3>
                         {selectedOrder.items.map((item, idx) => (
                             <div key={idx} className="flex justify-between items-center bg-gray-50 p-3 rounded-lg border text-sm">
-                                <div><p className="font-semibold">{item.name}</p><p className="text-gray-500">Color: {item.color}</p></div>
-                                <p className="font-medium">Qty: {item.qty}</p>
+                                <div><p className="font-semibold text-gray-900">{item.name}</p><p className="text-gray-500">Color: {item.color}</p></div>
+                                <p className="font-medium text-gray-900">Qty: {item.qty}</p>
                             </div>
                         ))}
                     </div>
-                    <div className="border-t pt-4">
-                        <h3 className="font-bold text-gray-700 mb-3">Status Progress Flow</h3>
-                        <div className="grid grid-cols-5 gap-2 text-center text-[10px] font-bold">
-                            {steps.map((step, idx) => (
-                                <div key={step} className={`p-2 rounded border ${idx <= steps.indexOf(selectedOrder.status) ? 'bg-red-800 text-white border-red-900' : 'bg-gray-100 text-gray-400 border-gray-200'}`}>{step}</div>
-                            ))}
+                    
+                    {/* RESTORED ROUNDED TRACKING FLOW STEPS WITH TICKS */}
+                    <div className="border-t pt-6">
+                        <h3 className="font-bold text-gray-700 mb-4">Status Tracking Flow</h3>
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 relative">
+                            {steps.map((step, idx) => {
+                                const isCompleted = idx <= steps.indexOf(selectedOrder.status);
+                                return (
+                                    <div key={step} className="flex sm:flex-col items-center gap-2 flex-1 w-full">
+                                        <div className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold shadow-sm ${isCompleted ? 'bg-emerald-600 text-white' : 'bg-gray-200 text-gray-400'}`}>
+                                            {isCompleted ? '✓' : idx + 1}
+                                        </div>
+                                        <span className={`text-[10px] font-bold ${isCompleted ? 'text-emerald-700' : 'text-gray-400'}`}>{step}</span>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
