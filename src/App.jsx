@@ -14,7 +14,7 @@ export default function OrderPortal() {
     const [password, setPassword] = useState('');
 
     // Cleaned hotlink URL pointing directly to the web logo asset
-    const logoUrl = "https://squarespace-cdn.com";
+    const logoUrl = "https://squarespace-cdn.com".replace(/&/g, "&amp;");
 
     const handleLogin = (e) => {
         e.preventDefault();
