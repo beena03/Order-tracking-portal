@@ -15,6 +15,18 @@ export default function OrderPortal() {
     const logoUrl = "/logo.png";
     const steps = ['Stock Enroute', 'Stock Arrived', 'Sandblasting', 'Completed', 'Installed'];
 
+    // Helper function to get distinct background colors for each status panel
+    const getStatusColor = (status) => {
+        switch (status) {
+            case 'Stock Enroute': return 'bg-amber-600';
+            case 'Stock Arrived': return 'bg-indigo-600';
+            case 'Sandblasting': return 'bg-orange-600';
+            case 'Completed': return 'bg-blue-600';
+            case 'Installed': return 'bg-emerald-600';
+            default: return 'bg-gray-600';
+        }
+    };
+
     return (
         <div className="min-h-screen bg-gray-50 text-gray-900 font-sans flex flex-col items-center p-4">
             {/* PORTAL NAVIGATION HEADER */}
@@ -45,7 +57,6 @@ export default function OrderPortal() {
                     <form onSubmit={(e) => { e.preventDefault(); if (username && password) setCurrentPage('dashboard'); }} className="space-y-4">
                         <input type="text" placeholder="Username" required value={username} onChange={e => setUsername(e.target.value)} className="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-600 outline-none" />
                         <input type="password" placeholder="Password" required value={password} onChange={e => setPassword(e.target.value)} className="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-600 outline-none" />
-                        {/* SIGN IN BUTTON MODIFIED TO EMERALD GREEN */}
                         <button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 rounded-lg transition shadow-sm">Sign In</button>
                     </form>
                 </div>
@@ -63,9 +74,10 @@ export default function OrderPortal() {
                             <tbody>
                                 {MOCK_ORDERS.map(order => (
                                     <tr key={order.id} className="border-b hover:bg-gray-50 transition">
-                                        {/* TABLE DETAILS CONFIGURED TO EMERALD GREEN ACTION BUTTONS */}
-                                        <td className="p-3"><button onClick={() => { setSelectedOrder(order); setCurrentPage('details'); }} className="text-emerald-600 font-semibold hover:underline">{order.number}</button></td>
-                                        <td className="p-3"><span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700">{order.status}</span></td>
+                                        {/* MODIFIED: Blue and Underlined Order Number link */}
+                                        <td className="p-3"><button onClick={() => { setSelectedOrder(order); setCurrentPage('details'); }} className="text-blue-600 font-semibold hover:underline">{order.number}</button></td>
+                                        {/* MODIFIED: White font status with specialized panel color fields */}
+                                        <td className="p-3"><span className={`px-2.5 py-1 rounded-full text-xs font-semibold text-white ${getStatusColor(order.status)}`}>{order.status}</span></td>
                                         <td className="p-3 text-sm text-gray-600">{order.updated}</td>
                                     </tr>
                                 ))}
@@ -94,7 +106,7 @@ export default function OrderPortal() {
                         ))}
                     </div>
                     
-                    {/* RESTORED ROUNDED TRACKING FLOW STEPS WITH TICKS */}
+                    {/* STATUS TRACKING FLOW WITH TICK MARK BUBBLES */}
                     <div className="border-t pt-6">
                         <h3 className="font-bold text-gray-700 mb-4">Status Tracking Flow</h3>
                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 relative">
