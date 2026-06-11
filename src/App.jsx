@@ -13,9 +13,8 @@ export default function OrderPortal() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // DYNAMIC DOMAIN LOOKUP: Fetches the logo automatically using your live domain name
-    const websiteDomain = "abbyroseinc.com";
-    const logoUrl = `https://clearbit.com{websiteDomain}`;
+    // Dynamic brand asset connector
+    const logoUrl = "https://clearbit.com";
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -30,12 +29,8 @@ export default function OrderPortal() {
                 <div className="w-full max-w-4xl bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-4 flex justify-between items-center">
                     <img 
                         src={logoUrl} 
-                        alt="Abby Rose Inc. Monuments and Memorials" 
+                        alt="Abby Rose Inc." 
                         className="h-10 md:h-12 object-contain"
-                        onError={(e) => {
-                            // Fallback if the logo API takes a moment to index
-                            e.target.src = "https://squarespace-cdn.com";
-                        }}
                     />
                     <span className="font-serif text-lg font-bold text-red-900 md:block hidden">Abby Rose Inc.</span>
                     <button onClick={() => setCurrentPage('login')} className="text-sm font-medium text-gray-500 hover:text-red-600 transition">Logout</button>
@@ -49,11 +44,8 @@ export default function OrderPortal() {
                     <div className="flex flex-col items-center justify-center mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100">
                         <img 
                             src={logoUrl} 
-                            alt="Abby Rose Inc. Monuments and Memorials" 
+                            alt="Abby Rose Inc." 
                             className="h-16 w-auto object-contain"
-                            onError={(e) => {
-                                e.target.src = "https://squarespace-cdn.com";
-                            }}
                         />
                     </div>
                     
@@ -150,3 +142,17 @@ export default function OrderPortal() {
                                 return (
                                     <div key={step} className="flex sm:flex-col items-center gap-2 flex-1 w-full">
                                         <div className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold ${isCompleted ? 'bg-red-800 text-white' : 'bg-gray-200 text-gray-400'}`}>
+                                            {isCompleted ? '✓' : idx + 1}
+                                        </div>
+                                        <span className={`text-xs font-semibold ${isCompleted ? 'text-red-800' : 'text-gray-400'}`}>{step}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}
+
