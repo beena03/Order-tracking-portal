@@ -13,8 +13,8 @@ export default function OrderPortal() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // Fixed: The link is completely cleaned to prevent compilation crashes
-    const logoUrl = "https://squarespace-cdn.com";
+    // FIXED: Broken into string fragments to prevent the compiler from reading the %26 as a syntax layout operator
+    const logoUrl = "https://squarespace-cdn.com+" + "%26" + "+Memorials";
 
     const handleLogin = (e) => {
         e.preventDefault();
